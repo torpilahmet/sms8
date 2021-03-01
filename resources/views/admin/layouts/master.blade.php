@@ -29,14 +29,7 @@
     <!-- Left side column. contains the logo and sidebar -->
     @include('admin.layouts.partials.sidebar')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <div class="container-full">
-
-            <!-- Main content -->
-            @yield('content')
-            <!-- /.content -->
-        </div>
-    </div>
+    @yield('content')
     <!-- /.content-wrapper -->
         @include('admin.layouts.partials.footer')
 
