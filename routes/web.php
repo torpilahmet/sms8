@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Backend\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 
@@ -23,14 +24,25 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('admin.index');
 })->name('dashboard');
 
+Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
+Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->name('admin.')->group(function () {
 
-Route::prefix('admin')->name('admin.')->group(function () {
-
-    Route::get('/logout', [AdminController::class, 'logout'])->name('logout');
 
 //User Management All Routes
     Route::prefix('users')->name('users.')->group(function () {
+        Route::get('/profile', [UserController::class, 'UserProfile'])->name('profile');
         Route::get('/view', [UserController::class, 'UserView'])->name('view');
+        Route::get('/add', [UserController::class, 'UserAdd'])->name('add');
+        Route::post('/add', [UserController::class, 'UserStore'])->name('store');
+        Route::get('/edit/{id}', [UserController::class, 'UserEdit'])->name('edit');
+        Route::post('/update/{id}', [UserController::class, 'UserUpdate'])->name('update');
+        Route::delete('/{id}', [UserController::class, 'UserDestroy'])->name('delete');
+    });
+
+    Route::prefix('profiles')->name('profiles.')->group(function () {
+        Route::get('/profile', [ProfileController::class, 'ProfileView'])->name('profile');
+        Route::get('/edit', [ProfileController::class, 'ProfileEdit'])->name('edit');
+        Route::post('/update/{id}', [ProfileController::class, 'ProfileUpdate'])->name('update');
     });
 });
 

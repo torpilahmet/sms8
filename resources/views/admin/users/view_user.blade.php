@@ -1,25 +1,9 @@
 @extends('admin.layouts.master')
-
+@section('title', 'User List')
 @section('content')
     <div class="content-wrapper">
         <div class="container-full">
             <!-- Content Header (Page header) -->
-            <div class="content-header">
-                <div class="d-flex align-items-center">
-                    <div class="mr-auto">
-                        <h3 class="page-title">Users</h3>
-                        <div class="d-inline-block align-items-center">
-                            <nav>
-                                <ol class="breadcrumb">
-                                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}"><i class="mdi mdi-home-outline"></i></a></li>
-                                    <li class="breadcrumb-item" aria-current="page">Users</li>
-                                    <li class="breadcrumb-item active" aria-current="page">View Users All</li>
-                                </ol>
-                            </nav>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
             <!-- Main content -->
             <section class="content">
@@ -29,7 +13,8 @@
 
                         <div class="box">
                             <div class="box-header with-border">
-                                <h3 class="box-title">All User List</h3>
+                                <h3 class="box-title">@if(Session::has('message')) All User List @endif</h3>
+                                <a href="{{ route('admin.users.add') }}" style="float: right" class="btn btn-md btn-rounded btn-success mb-5">Add User</a>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -37,25 +22,43 @@
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
+                                            <th width="5%">SL</th>
+                                            <th>Role</th>
                                             <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th>Salary</th>
+                                            <th>Email</th>
+                                            <th width="25%">Action</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        @foreach($users as $user)
+                                        @foreach($users as $key => $user)
                                         <tr>
-                                            <td><img src="{{ Storage::url($user->profile_photo_path) }}" class="img img-thumbnail" width="100" alt="{{ $user->name }}"></td>
+                                            <td class="text-center" > {{$key+1}}</td>
+                                            <td> {{ $user->usertype }}</td>
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
-                                            <td>61</td>
-                                            <td>{{ $user->created_at->diffForHumans() }}</td>
-                                            <td>$320,800</td>
+                                            <td>
+                                                @if($user->id != Auth::id())
+                                                <form id="delete-user-form" action="{{ route('admin.users.delete', $user->id) }}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <a href="{{ route('admin.users.edit', $user->id) }}" class="btn btn-md btn-rounded btn-info mb-5">Edit</a>
+                                                    <input type="submit" class="btn btn-md btn-rounded btn-danger mb-5" value="Delete">
+                                                </form>
+                                                @else
+                                                    <a href="{{ route('admin.profiles.profile') }}" class="btn btn-md btn-rounded btn-info mb-5">View Profile</a>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
+                                        </tbody>
+                                        <tfoot>
+                                        <tr>
+                                            <th>SL</th>
+                                            <th>Role</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Action</th>
+                                        </tr>
                                         </tfoot>
                                     </table>
                                 </div>
@@ -83,4 +86,5 @@
 @section('script')
     <script src="{{ asset('assets/vendor_components/datatable/datatables.min.js') }}"></script>
     <script src="{{ asset('backend/js/pages/data-table.js') }}"></script>
+
 @endsection

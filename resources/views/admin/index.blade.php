@@ -1,7 +1,9 @@
 @extends('admin.layouts.master')
 @section('title', 'Dashboard')
 @section('content')
-    <section class="content">
+<div class="content-wrapper">
+    <div class="container-full">
+        <section class="content">
         <div class="row">
             <div class="col-xl-2 col-6">
                 <div class="box overflow-hidden pull-up">
@@ -499,6 +501,8 @@
             </div>
         </div>
     </section>
+    </div>
+</div>
 @endsection
 
 @section('css')
