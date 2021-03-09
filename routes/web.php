@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\ProfileController;
+use App\Http\Controllers\Backend\Setup\StudentClassController;
+use App\Http\Controllers\Backend\Setup\StudentGroupController;
+use App\Http\Controllers\Backend\Setup\StudentYearController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Backend\UserController;
 
@@ -43,6 +46,30 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('admin')->name('admin.')
         Route::get('/profile', [ProfileController::class, 'ProfileView'])->name('profile');
         Route::get('/edit', [ProfileController::class, 'ProfileEdit'])->name('edit');
         Route::post('/update/{id}', [ProfileController::class, 'ProfileUpdate'])->name('update');
+    });
+
+    Route::prefix('setups')->group(function () {
+        Route::get('class/view', [StudentClassController::class, 'ViewStudentClass'])->name('class.view');
+        Route::get('class/add', [StudentClassController::class, 'AddStudentClass'])->name('class.add');
+        Route::post('class/add', [StudentClassController::class, 'StoreStudentClass'])->name('class.store');
+        Route::get('class/edit/{id}', [StudentClassController::class, 'EditStudentClass'])->name('class.edit');
+        Route::post('class/update/{id}', [StudentClassController::class, 'UpdateStudentClass'])->name('class.update');
+        Route::delete('class/{id}', [StudentClassController::class, 'DestroyStudentClass'])->name('class.delete');
+
+        Route::get('year/view', [StudentYearController::class, 'ViewStudentYear'])->name('years.view');
+        Route::get('year/add', [StudentYearController::class, 'AddStudentYear'])->name('years.add');
+        Route::post('year/add', [StudentYearController::class, 'StoreStudentYear'])->name('years.store');
+        Route::get('year/edit/{id}', [StudentYearController::class, 'EditStudentYear'])->name('years.edit');
+        Route::post('year/update/{id}', [StudentYearController::class, 'UpdateStudentYear'])->name('years.update');
+        Route::delete('year/{id}', [StudentYearController::class, 'DestroyStudentYear'])->name('years.delete');
+
+        Route::get('group/view', [StudentGroupController::class, 'ViewStudentGroup'])->name('groups.view');
+        Route::get('group/add', [StudentGroupController::class, 'AddStudentGroup'])->name('groups.add');
+        Route::post('group/add', [StudentGroupController::class, 'StoreStudentGroup'])->name('groups.store');
+        Route::get('group/edit/{id}', [StudentGroupController::class, 'EditStudentGroup'])->name('groups.edit');
+        Route::post('group/update/{id}', [StudentGroupController::class, 'UpdateStudentGroup'])->name('groups.update');
+        Route::delete('group/{id}', [StudentGroupController::class, 'DestroyStudentGroup'])->name('groups.delete');
+
     });
 });
 

@@ -57,6 +57,20 @@ $route = Route::current()->getName();
                 </ul>
             </li>
 
+            <li class="treeview {{ $prefix == 'admin/setups' ? 'active menu-open' : '' }}">
+                <a href="#">
+                    <i data-feather="inbox"></i> <span>Setup Management</span>
+                    <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="{{ $route == 'admin.class.view' ? 'active' : '' }}"><a href="{{ route('admin.class.view') }}"><i class="ti-more"></i>Student Class</a></li>
+                    <li class="{{ $route == 'admin.years.view' ? 'active' : '' }}"><a href="{{ route('admin.years.view') }}"><i class="ti-more"></i>Student Year</a></li>
+                    <li class="{{ $route == 'admin.groups.view' ? 'active' : '' }}"><a href="{{ route('admin.groups.view') }}"><i class="ti-more"></i>Student Groups</a></li>
+                </ul>
+            </li>
+
             <li class="header nav-small-cap">EXTRA</li>
 
             <li class="treeview">
