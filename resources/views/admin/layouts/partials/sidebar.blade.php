@@ -68,6 +68,13 @@ $route = Route::current()->getName();
                     <li class="{{ $route == 'admin.class.view' ? 'active' : '' }}"><a href="{{ route('admin.class.view') }}"><i class="ti-more"></i>Student Class</a></li>
                     <li class="{{ $route == 'admin.years.view' ? 'active' : '' }}"><a href="{{ route('admin.years.view') }}"><i class="ti-more"></i>Student Year</a></li>
                     <li class="{{ $route == 'admin.groups.view' ? 'active' : '' }}"><a href="{{ route('admin.groups.view') }}"><i class="ti-more"></i>Student Groups</a></li>
+                    <li class="{{ $route == 'admin.shifts.view' ? 'active' : '' }}"><a href="{{ route('admin.shifts.view') }}"><i class="ti-more"></i>Student Shift</a></li>
+                    <li class="{{ $route == 'admin.fee.categories.view' ? 'active' : '' }}"><a href="{{ route('admin.fee.categories.view') }}"><i class="ti-more"></i>Fee Category</a></li>
+                    <li class="{{ $route == 'admin.fee.amounts.view' ? 'active' : '' }}"><a href="{{ route('admin.fee.amounts.view') }}"><i class="ti-more"></i>Fee Category Amounts</a></li>
+                    <li class="{{ $route == 'admin.exam.types.view' ? 'active' : '' }}"><a href="{{ route('admin.exam.types.view') }}"><i class="ti-more"></i>Exam Type</a></li>
+                    <li class="{{ $route == 'admin.school.subjects.view' ? 'active' : '' }}"><a href="{{ route('admin.school.subjects.view') }}"><i class="ti-more"></i>School Subject</a></li>
+                    <li class="{{ $route == 'admin.assign.subjects.view' ? 'active' : '' }}"><a href="{{ route('admin.assign.subjects.view') }}"><i class="ti-more"></i>Assign Subject</a></li>
+                    <li class="{{ $route == 'admin.designations.view' ? 'active' : '' }}"><a href="{{ route('admin.designations.view') }}"><i class="ti-more"></i>Designation</a></li>
                 </ul>
             </li>
 
